@@ -7,31 +7,35 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 function generatePassword() {
-
   lowerCase = "abcdefghijklmnopqrstuvwxyz";
   upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   numbers = "0123456789";
-  specialChars = " !#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
+  specialChars = " !#$%&'()*+,-./:;<=>?@[]^_`{|}~";
   var passArray = "";
 
   //console.log("You clicked the button!");
-  var passwordLength = window.prompt("How many characters would you like your password to contain? 8-128 characters");
+  var passwordLength = window.prompt(
+    "How many characters would you like your password to contain? 8-128 characters"
+  );
   if (passwordLength < 8 || passwordLength > 128) {
     window.alert("Please select a length between 8 and 128 characters");
     return;
   } else {
-
-    var lowerAdd = window.confirm("Would you like to include lowercase letters?");
+    var lowerAdd = window.confirm(
+      "Would you like to include lowercase letters?"
+    );
     if (lowerAdd === true) {
       passArray = passArray.concat(lowerCase);
+      // need to force in a random lowercase letter within the if statement
+      //increment a counter to control how long the for loop runs
     }
-    
 
-    var upperAdd = window.confirm("Would you like to include uppercase letters?");
+    var upperAdd = window.confirm(
+      "Would you like to include uppercase letters?"
+    );
     if (upperAdd === true) {
       passArray = passArray.concat(upperCase);
     }
@@ -41,28 +45,23 @@ function generatePassword() {
       passArray = passArray.concat(numbers);
     }
 
-    var specialAdd = window.confirm("Would you like to include special characters?")
+    var specialAdd = window.confirm(
+      "Would you like to include special characters?"
+    );
     if (specialAdd === true) {
       passArray = passArray.concat(specialChars);
     }
 
     userPass = "";
 
-    for (var i = 0; i < passwordLength; ++i) { 
+    for (var i = 0; i < passwordLength; ++i) {
       var randomPass = passArray[Math.floor(Math.random() * passArray.length)];
-        userPass = userPass.concat(randomPass);
-
-      }
-    
+      userPass = userPass.concat(randomPass);
     }
+  }
 
-  
-return userPass;
-  
+  return userPass;
 }
-
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
